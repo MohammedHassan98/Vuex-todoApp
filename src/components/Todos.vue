@@ -1,8 +1,20 @@
 <template>
     <div>
         <h3> Todos </h3>
+        <div class="legend">
+            <span> Doble click to mark as completed </span>
+            <span>
+                <span class="incomplete-box"></span> = Incomplete
+            </span>
+            <span>
+                <span class="complete-box"></span> = Complete
+            </span>
+        </div>
         <div class="todos">
-            <div v-for="todo in allTodos" :key="todo.id" class="todo" >
+            <div @dblclick="onDBClick(todo)" 
+                 v-for="todo in allTodos" :key="todo.id" 
+                 class="todo" 
+                 v-bind:class="{'is-complete':todo.completed}"> 
                 {{todo.title}}
                 <i @click="DeleteTodo(todo.id)" class="fas fa-trash-alt"></i>
             </div>
@@ -24,7 +36,15 @@ export default {
     computed: mapGetters(["allTodos"]),
 
     methods: {
-        ...mapActions(['fetchTodos','DeleteTodo'])
+        ...mapActions(['fetchTodos','DeleteTodo','updateTodos']),
+        onDBClick(todo){
+            const update = {
+                id: todo.id,
+                title: todo.title,
+                completed: ! todo.completed
+            }
+            this.updateTodos(update)
+        }
     },
 
     created() {
