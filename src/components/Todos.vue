@@ -41,7 +41,7 @@ export default {
     }
 
     .todo{
-        border: 1px solid #ccc;
+        border: 1px solid rgb(232, 230, 230);
         background: #41b883;
         padding: 1rem;
         border-radius: 5px;
