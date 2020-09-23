@@ -1,11 +1,12 @@
 <template>
-  <div class="container">
-    <Todos/>
+  <div id="app">
+    <div class="container">
+      <Todos/>
+    </div>
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
 import Todos from './components/Todos'
 export default {
   name: 'App',
