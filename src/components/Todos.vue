@@ -2,8 +2,11 @@
     <div>
         <h3> Todos </h3>
         <div class="todos">
-            <div class="todo"> Todo 1 </div>
-            <div v-for="todo in allTodos" :key="todo.id" class="todo" > {{todo.title}} </div>
+            <div v-for="todo in allTodos" :key="todo.id" class="todo" >
+                {{todo.title}}
+                <i @click="DeleteTodo(todo.id)" class="fas fa-trash-alt"></i>
+            </div>
+            
         </div>
     </div>
 </template>
@@ -21,7 +24,7 @@ export default {
     computed: mapGetters(["allTodos"]),
 
     methods: {
-        ...mapActions(['fetchTodos'])
+        ...mapActions(['fetchTodos','DeleteTodo'])
     },
 
     created() {
@@ -49,4 +52,37 @@ export default {
         position: relative;
         cursor: pointer;
     }
+    i {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        color: #fff;
+        cursor: pointer;
+        }
+    .legend {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 1rem;
+        }
+    .complete-box {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background: #35495e;
+        }
+    .incomplete-box {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background: #41b883;
+        }
+    .is-complete {
+        background: #35495e;
+        color: #fff;
+        }
+        @media (max-width: 500px) {
+    .todos {
+            grid-template-columns: 1fr;
+        }
+        }
 </style>

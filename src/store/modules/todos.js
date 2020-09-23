@@ -17,12 +17,17 @@ const actions = {
         const response = await axios.post(
             'https://jsonplaceholder.typicode.com/todos', {title, compeleted: false})
         commit('newTodo',response.data)
+    },
+    async DeleteTodo( { commit }, id ){
+        const response = await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+        commit('deleteTodo',response.data)
     }
 }
 
 const mutations = {
     setTodos: (state,todos) => (state.todos = todos),
-    newTodo: (state,todos) => (state.todos.unshift(todos))
+    newTodo: (state,todos) => (state.todos.unshift(todos)),
+    deleteTodo: (state,id) => (state.todos.filter(todo => todo.id !== id))
 }
 
 export default {
